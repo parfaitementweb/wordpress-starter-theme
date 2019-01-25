@@ -8,7 +8,7 @@ This Wordpress starter theme is built with Modern PHP development practises in m
 Execute the following commands:
 
     cd wp-content/themes
-    php composer create-project parfaitement/wordpress-starter-theme yourtemplatename
+    composer create-project parfaitementweb/wordpress-starter-theme yourtemplatename
     
     cd yourtemplatename
     npm install

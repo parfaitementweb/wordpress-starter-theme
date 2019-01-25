@@ -20,5 +20,7 @@
                 "wpackagist-plugin/classic-editor"
             ]
         }
-    }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
 }
