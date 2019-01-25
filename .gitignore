@@ -1,0 +1,10 @@
+.idea
+.env
+*.sublime-project
+*.sublime-workspace
+.npmrc
+auth.json
+npm-debug.log
+/node_modules
+/vendor
+/compiled

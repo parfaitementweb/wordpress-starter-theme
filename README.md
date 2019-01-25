@@ -5,8 +5,9 @@ This Wordpress starter theme is built with Modern PHP development practises in m
 ---
 
 ## Installation
-From your `wp-content/themes` folder, execute the following command.
+Execute the following commands:
 
+    cd wp-content/themes
     php composer create-project parfaitement/wordpress-starter-theme yourtemplatename
     
     cd yourtemplatename
@@ -17,8 +18,7 @@ From your `wp-content/themes` folder, execute the following command.
 
 ---
 
-> No specific footprint
----
+## Ideology behind this starter theme: No specific footprint
 This starter theme is based on the underscores.me file structure and only includes an additional and optional set of tools to ease your development.  
 You will and can still develop your theme as any other basic Wordpress Theme.
 
@@ -71,7 +71,7 @@ Link your assets (images, icon, ...) using our custom `asset()` helper.
 
     <img src="{{ asset('/images/logo.png') }}" />`
 
-## Classic Editor. Goodby Gutenberg.
+## Classic Editor. Goodbye Gutenberg.
 Using the following command, you can download and install the [Classic Editor plugin](https://wordpress.org/plugins/classic-editor/) in your Wordpress default plugins folder.
 >You still need to manually activate the plugin in the Plugins page.
 
@@ -90,7 +90,8 @@ You can enable or disable any of them by copying the `.env.example` configuratio
 | DISABLE_GUTENBERG_BLOCK | true | Removes Block Library scripts |
 | DISABLE_OEMBED | true | Disable oEmebed scripts |
 | HIDE_FRONTEND_TOOLBAR | true | Hides the admin toolbar on front and hides the option in the Profile Options page. |
-| HIDE_FRONTPAGE_ADMIN_ATTRS | true | hides the page attributes in the admin when editing the frontpage. |
+| HIDE_FRONTPAGE_ADMIN_ATTRS | true | Hides the page attributes in the admin when editing the frontpage. |
+| ASYNC_SCRIPTS | true | Add the `async="async"` attribute to all enqueued script. |
 
 ## Helpers
 
