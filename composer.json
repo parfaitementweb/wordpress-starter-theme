@@ -1,6 +1,7 @@
 {
+    "name": "parfaitementweb/wordpress-starter-theme",
     "require": {
-        "parfaitementweb/parfaitement-starter-core": "dev-master",
+        "parfaitementweb/wordpress-starter-core": "dev-master",
         "wpackagist-plugin/classic-editor": "^1.3"
     },
     "autoload": {
