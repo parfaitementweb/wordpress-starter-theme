@@ -7,4 +7,3 @@ auth.json
 npm-debug.log
 /node_modules
 /vendor
-/compiled/*
