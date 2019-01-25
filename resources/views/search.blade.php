@@ -12,7 +12,7 @@
     <h1>{{ printf( esc_html__( 'Search Results for: %s', 'parf' ), '<span>' . get_search_query() . '</span>' ) }}</h1>
 
     @while (have_posts()) @php the_post() @endphp
-        @include('partials.contents.content)
+        @include('partials.contents.content')
     @endwhile
 
     {!! get_the_posts_navigation() !!}

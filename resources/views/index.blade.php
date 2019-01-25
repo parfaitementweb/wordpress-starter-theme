@@ -10,7 +10,7 @@
     @endif
 
     @while (have_posts()) @php the_post() @endphp
-        @include('partials.contents.content)
+        @include('partials.contents.content')
     @endwhile
 
     {!! get_the_posts_navigation() !!}
