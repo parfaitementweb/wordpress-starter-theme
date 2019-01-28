@@ -4,12 +4,12 @@
 
     @if (!have_posts())
         <div class="alert alert-warning">
-            {{ __('Sorry, no results were found.') }}
+            {{ __('Sorry, no results were found.', 'starter_theme') }}
         </div>
-        {!! get_search_form(false) !!}
+        
     @endif
 
-    <h1>{{ printf( esc_html__( 'Search Results for: %s', 'parf' ), '<span>' . get_search_query() . '</span>' ) }}</h1>
+    <h1>{!! __( 'Search Results for: <span>' . get_search_query() . '</span>', 'starter_theme' ) !!}</h1>
 
     @while (have_posts()) @php the_post() @endphp
         @include('partials.contents.content')

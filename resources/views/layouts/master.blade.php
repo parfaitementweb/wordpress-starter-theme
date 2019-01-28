@@ -6,9 +6,16 @@
 
 <body @php body_class() @endphp>
 
-@include('partials.navigation')
+@include('partials.header')
 
-@yield('content')
+<div class="wrap">
+    <div id="primary" class="content-area">
+        <main id="main" class="site-main" role="main">
+            @yield('content')
+        </main><!-- #main -->
+    </div><!-- #primary -->
+    @include('sidebar')
+</div><!-- .wrap -->
 
 @php do_action('get_footer') @endphp
 @include('partials.footer')
