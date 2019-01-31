@@ -91,7 +91,6 @@ You can enable or disable any of them by copying the `.env.example` configuratio
 | DISABLE_OEMBED | true | Disable oEmebed scripts |
 | HIDE_FRONTEND_TOOLBAR | true | Hides the admin toolbar on front and hides the option in the Profile Options page. |
 | HIDE_FRONTPAGE_ADMIN_ATTRS | true | Hides the page attributes in the admin when editing the frontpage. |
-| ASYNC_SCRIPTS | true | Add the `async="async"` attribute to all enqueued script. |
 
 ## Helpers
 
