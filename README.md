@@ -4,6 +4,10 @@ This Wordpress starter theme is built with Modern PHP development practises in m
 
 ---
 
+[![Latest Version on Packagist](https://img.shields.io/packagist/v/parfaitementweb/wordpress-starter-theme.svg?style=flat-square)](https://packagist.org/packages/parfaitementweb/wordpress-starter-theme)
+[![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE.md)
+[![Total Downloads](https://img.shields.io/packagist/dt/parfaitementweb/wordpress-starter-theme.svg?style=flat-square)](https://packagist.org/packages/parfaitementweb/wordpress-starter-theme)
+
 ## Installation
 Execute the following commands:
 
