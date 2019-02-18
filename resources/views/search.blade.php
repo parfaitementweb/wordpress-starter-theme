@@ -9,7 +9,7 @@
         
     @endif
 
-    <h1>{!! __( 'Search Results for: <span>' . get_search_query() . '</span>', 'starter_theme' ) !!}</h1>
+    <h1>{!! __( 'Search Results for: <span>' . $query . '</span>', 'starter_theme' ) !!}</h1>
 
     @while (have_posts()) @php the_post() @endphp
         @include('partials.contents.content')

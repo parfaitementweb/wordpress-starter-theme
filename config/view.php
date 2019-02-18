@@ -25,6 +25,6 @@ return [
     |
     */
 
-    'compiled' => '/compiled',
+    'compiled' => '/compiled/views',
 
 ];

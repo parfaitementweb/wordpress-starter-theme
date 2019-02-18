@@ -1,11 +1,9 @@
 <?php
 
 /**
- * The main template file
+ * Search results page
  *
- * This is the most generic template file in a WordPress theme
- * and one of the two required files for a theme (the other being style.css).
- * It is used to display a page when nothing more specific matches a query.
+ * Learn more: http://codex.wordpress.org/Template_Hierarchy
  *
  * Include CSS for this query using:
  * $core->include_style('extra.css');
@@ -24,5 +22,7 @@ $core = new Parfaitement\Core;
  * MUST BE PLACED AT THE END
  */
 
-$data = [];
-$core->render('index', $data);
+$data = [
+    'query' => get_search_query(),
+];
+$core->render('search', $data);

@@ -2,6 +2,8 @@
 
 This Wordpress starter theme is built with Modern PHP development practises in mind.
 
+This starter theme is based on the underscores.me file structure and only includes an additional and optional set of tools to ease your development.  You can and will still develop your theme as any other basic Wordpress Theme.
+
 ---
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/parfaitementweb/wordpress-starter-theme.svg?style=flat-square)](https://packagist.org/packages/parfaitementweb/wordpress-starter-theme)
@@ -18,13 +20,9 @@ Execute the following commands:
     npm install
     npm run watch
     
-    # For production building: npm run production
-
----
-
-## Ideology behind this starter theme: No specific footprint
-This starter theme is based on the underscores.me file structure and only includes an additional and optional set of tools to ease your development.  
-You will and can still develop your theme as any other basic Wordpress Theme.
+    # Build your assets for production using
+    # npm run production
+    # Read more about Laravel Mix on their official documentation.
 
 ---
 
@@ -34,19 +32,23 @@ Wordpress Templates views ending with `.blade.php` instead of the regular `.php`
 We recommend placing all your templates in the `resources/views` folder, although default Wordpress location is supported.
 
 ## Controllers
-You can execute and pass code for a specific template using a dedicated controller. This feature offers the C part of "MVC".
+Default Wordpress templates files (such as index.php, page.php, etc.) are now your Controllers.
+Define in them all the logic for the specified template.
 
 ### How to use
-1. All controllers are stored in the `app/controllers` folder.
-2. The Class name and filename should be CamelCase and the same as the targeted Wordpress Template file. Example: `Single.php, Page.php, FrontPage.php`
-3. The `view()`public function should returns an array with the data you want to pass to the template.
-4. The controller is called automatically. No action from your part is needed.
+1. The Wordpress template file should not direclty return HTML or PHP code.
+2  You should a call our core library using `$core = new Parfaitement\Core;` . This is going to return an object with a lot of the common things we need across the site
+3. Return your [Laravel Blade](https://laravel.com/docs/5.7/blade) using the `$core->render($view, $data)` method.  
+    `$view` is the name of the view (without `.blade.php` extension). 
+    `$data` is an array of variables you want to pass to the view.
+    
+    > Views are saved under the resources/views folder.  
 
-The view() function offers additional features:
-- Access The [Laravel HTTP Request](https://laravel.com/docs/5.7/requests) using `$this->$request`  
-It's useful for retrieving input with `$this->request->input('name');` by exemple.
-- Inject specific a CSS file for **this template only** using `$this->include_style()`
-- Inject specific a JS file for **this template only** using `$this->include_script()`
+The `$core` variable offers additional features:
+- Access The [Laravel HTTP Request](https://laravel.com/docs/5.7/requests) using `$core->$request`  
+It's useful for retrieving input with `$core->request->input('name')` by exemple.
+- Inject specific a CSS file for **this template only** using `$core->include_style()`
+- Inject specific a JS file for **this template only** using `$core->include_script()`
 
 
 ## Assets
@@ -68,7 +70,7 @@ Out-of-the box, it includes:
 
 #### mix()
 We've added support for the `mix()` helper for cache-busting from within your template.  
-When using `$this->include_style()` or `$this->include_script()` in your controllers, your scripts ans styles will be automatically cache-busted.
+When using `$core->include_style()` or `$core->include_script()` in your controllers, your scripts ans styles will be automatically cache-busted.
 
 #### Linking to assets from templates
 Link your assets (images, icon, ...) using our custom `asset()` helper.
@@ -109,3 +111,28 @@ You can use any **Arrays & Objects** and **Strings** Laravel Helper listed here:
 
 #### Dump & Die
 We've also add support for the famous `dd()` ("dump and die") helper function. This function dumps the variables using dump() and immediately ends the execution of the script (using exit).
+
+## Custom Theme Functions
+
+All PHP Class files placed under the `/app` folder will be autoloaded and accessible throughout your theme files. Use them for a convienent and testable place to store your custom logic.
+
+    <?php
+    
+    namespace App;
+    
+    class Custom
+    {
+        public function get_articles()
+        {
+            return [
+                'article' => 'foo',
+                'title' => 'bar'
+            ];
+        }
+    }
+    
+    ?>
+    
+    ## Usage
+    $custom = new \App\Custom();
+    $articles = $custom->get_articles();

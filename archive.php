@@ -1,11 +1,12 @@
 <?php
 
 /**
- * The main template file
+ * The template for displaying Archive pages.
  *
- * This is the most generic template file in a WordPress theme
- * and one of the two required files for a theme (the other being style.css).
- * It is used to display a page when nothing more specific matches a query.
+ * Used to display archive-type pages if nothing more specific matches a query.
+ * For example, puts together date-based pages if no date.php file exists.
+ *
+ * Learn more: http://codex.wordpress.org/Template_Hierarchy
  *
  * Include CSS for this query using:
  * $core->include_style('extra.css');
@@ -25,4 +26,4 @@ $core = new Parfaitement\Core;
  */
 
 $data = [];
-$core->render('index', $data);
+$core->render('archive', $data);
