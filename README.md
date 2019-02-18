@@ -26,11 +26,6 @@ Execute the following commands:
 
 ---
 
-## Views
-Wordpress Templates views ending with `.blade.php` instead of the regular `.php` will be parsed using the [Laravel Blade](https://laravel.com/docs/5.7/blade) template engine.
-
-We recommend placing all your templates in the `resources/views` folder, although default Wordpress location is supported.
-
 ## Controllers
 Default Wordpress templates files (such as index.php, page.php, etc.) are now your Controllers.
 Define in them all the logic for the specified template.
@@ -50,6 +45,9 @@ It's useful for retrieving input with `$core->request->input('name')` by exemple
 - Inject specific a CSS file for **this template only** using `$core->include_style()`
 - Inject specific a JS file for **this template only** using `$core->include_script()`
 
+
+## Views
+Blade views `*.blade.php` are stored under the `resources/views` folder and are parsed using the [Laravel Blade](https://laravel.com/docs/5.7/blade) template engine.
 
 ## Assets
 All assets are stored in the ``resources/assets`` folder. Normally as follow:
