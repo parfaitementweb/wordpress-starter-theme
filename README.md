@@ -95,6 +95,7 @@ You can enable or disable any of them by copying the `.env.example` configuratio
 | DISABLE_OEMBED | true | Disable oEmebed scripts |
 | HIDE_FRONTEND_TOOLBAR | true | Hides the admin toolbar on front and hides the option in the Profile Options page. |
 | HIDE_FRONTPAGE_ADMIN_ATTRS | true | Hides the page attributes in the admin when editing the frontpage. |
+| ADD_SLUG_BODY_CLASS | true | Add the current slug to the body classes list. |
 
 ## Helpers
 
