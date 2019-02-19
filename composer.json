@@ -1,5 +1,6 @@
 {
     "name": "parfaitementweb/wordpress-starter-theme",
+    "license": "MIT",
     "require": {
         "parfaitementweb/wordpress-starter-core": "1.1.*",
         "wpackagist-plugin/classic-editor": "^1.3"
