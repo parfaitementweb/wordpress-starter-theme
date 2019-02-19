@@ -74,28 +74,77 @@ When using `$core->include_style()` or `$core->include_script()` in your control
 Link your assets (images, icon, ...) using our custom `asset()` helper.
 
     <img src="{{ asset('/images/logo.png') }}" />`
+    
+## Forms
+Custom Form can be handle this way:
 
-## Classic Editor. Goodbye Gutenberg.
-Using the following command, you can download and install the [Classic Editor plugin](https://wordpress.org/plugins/classic-editor/) in your Wordpress default plugins folder.
->You still need to manually activate the plugin in the Plugins page.
+In your `page.php`
+    
+    $validator = $core->validation->make(
+        $core->request->input(),
+        [
+            'name' => 'required',
+            // other rules
+        ]
+    );
+    
+    if ($validator->fails()) {
+        $errors = $validator->errors();
+    }
+    
+    $data = [
+        'errors' => $errors
+    ];
+    $core->render('page', $data);
+    
+In your page.blade.php
 
-    composer install
+        @if (isset($errors) && $errors->any())
+            <div class="alert alert-danger" role="alert">
+                @foreach ($errors->all() as $error)
+                    <p>{{$error}}</p>
+                @endforeach
+            </div>
+        @endif
+        
+        <form action="{{ site_url() }}/wp-admin/admin-post.php" method="post">
+            <?php wp_nonce_field('contact_form') ?>
+    
+            <input type="hidden" name="action" value="contact_form">
+            <input type="text" name="name" placeholder="Your Name">
+                
+            <input type="submit" value="Submit">
+        </form>
+        
+In `app/ContactForm/php`
 
-## Cleaner Wordpress
-We've included several classes to offer a cleaner version of Wordpress by default.
- 
-You can enable or disable any of them by copying the `.env.example` configuration file at the root of your theme folder to `.env` and customize its content with the following options:
+    <?php
+    
+    namespace App;
+    
+    class ContactForm
+    {
+        public function __construct()
+        {
+            add_action('admin_post_nopriv_contact_form', [$this, 'handle_contact_form']);
+            add_action('admin_post_contact_form', [$this, 'handle_contact_form']);
+        }
+    
+        function handle_contact_form()
+        {
+            if (wp_verify_nonce($_POST['_wpnonce'], 'contact_form')) {
+                $redirect = add_query_arg('form', 'success', site_url('contact'));
+                wp_redirect($redirect);
+            }
+        }
+    }
+    
+Add this in your `functions.php` under Custom Functions section.
 
-| Option | Default | Description |
-|---|---|---|
-| DISABLE_COMMENTS | true | Disables all comments features |
-| DISABLE_EMOJIS | true |  Disables emojis scripts |
-| DISABLE_GENERATOR | true | Removes Generator meta tag |
-| DISABLE_GUTENBERG_BLOCK | true | Removes Block Library scripts |
-| DISABLE_OEMBED | true | Disable oEmebed scripts |
-| HIDE_FRONTEND_TOOLBAR | true | Hides the admin toolbar on front and hides the option in the Profile Options page. |
-| HIDE_FRONTPAGE_ADMIN_ATTRS | true | Hides the page attributes in the admin when editing the frontpage. |
-| ADD_SLUG_BODY_CLASS | true | Add the current slug to the body classes list. |
+    $contactForm = new \App\ContactForm();
+
+### Validation
+Our core had support for [Laravel Validation](https://laravel.com/docs/5.7/validation). 
 
 ## Helpers
 
@@ -134,3 +183,26 @@ All PHP Class files placed under the `/app` folder will be autoloaded and access
     ## Usage
     $custom = new \App\Custom();
     $articles = $custom->get_articles();
+    
+    
+## Classic Editor. Goodbye Gutenberg.
+Using the following command, you can download and install the [Classic Editor plugin](https://wordpress.org/plugins/classic-editor/) in your Wordpress default plugins folder.
+>You still need to manually activate the plugin in the Plugins page.
+
+    composer install
+
+## Cleaner Wordpress
+We've included several classes to offer a cleaner version of Wordpress by default.
+ 
+You can enable or disable any of them by copying the `.env.example` configuration file at the root of your theme folder to `.env` and customize its content with the following options:
+
+| Option | Default | Description |
+|---|---|---|
+| DISABLE_COMMENTS | true | Disables all comments features |
+| DISABLE_EMOJIS | true |  Disables emojis scripts |
+| DISABLE_GENERATOR | true | Removes Generator meta tag |
+| DISABLE_GUTENBERG_BLOCK | true | Removes Block Library scripts |
+| DISABLE_OEMBED | true | Disable oEmebed scripts |
+| HIDE_FRONTEND_TOOLBAR | true | Hides the admin toolbar on front and hides the option in the Profile Options page. |
+| HIDE_FRONTPAGE_ADMIN_ATTRS | true | Hides the page attributes in the admin when editing the frontpage. |
+| ADD_SLUG_BODY_CLASS | true | Add the current slug to the body classes list. |
