@@ -18,12 +18,5 @@
  * $core->request
  **/
 
-$core = new Parfaitement\Core;
-
-/**
- * Render the view
- * MUST BE PLACED AT THE END
- */
-
 $data = [];
 $core->render('archive', $data);

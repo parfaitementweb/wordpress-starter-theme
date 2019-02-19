@@ -15,13 +15,6 @@
  * $core->request
  **/
 
-$core = new Parfaitement\Core;
-
-/**
- * Render the view
- * MUST BE PLACED AT THE END
- */
-
 $data = [
     'query' => get_search_query(),
 ];
