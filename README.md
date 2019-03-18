@@ -15,11 +15,11 @@ Execute the following commands:
 
     cd wp-content/themes
     composer create-project parfaitementweb/wordpress-starter-theme
-    
+
     cd yourtemplatename
     npm install
     npm run watch
-    
+
     # Build your assets for production using
     # npm run production
     # Read more about Laravel Mix on their official documentation.
@@ -31,16 +31,16 @@ Default Wordpress templates files (such as index.php, page.php, etc.) are now yo
 Define in them all the logic for the specified template.
 
 ### How to use
-1. The Wordpress template file should not direclty return HTML or PHP code.
-2  You should a call our core library using `$core = new Parfaitement\Core;` . This is going to return an object with a lot of the common things we need across the site
-3. Return your [Laravel Blade](https://laravel.com/docs/5.7/blade) using the `$core->render($view, $data)` method.  
-    `$view` is the name of the view (without `.blade.php` extension). 
+1. The Wordpress template file should not directly return HTML or PHP code. 
+2.  You should a call our core library using `$core = new Parfaitement\Core;` . This is going to intantiate an object with a lot of the common functions we need across the site.
+3. Return your [Laravel Blade](https://laravel.com/docs/5.7/blade) using the `$core->render($view, $data)` method.
+    `$view` is the name of the view (without `.blade.php` extension).
     `$data` is an array of variables you want to pass to the view.
-    
-    > Views are saved under the resources/views folder.  
+
+    > Views are saved under the resources/views folder.
 
 The `$core` variable offers additional features:
-- Access The [Laravel HTTP Request](https://laravel.com/docs/5.7/requests) using `$core->$request`  
+- Access The [Laravel HTTP Request](https://laravel.com/docs/5.7/requests) using `$core->$request`
 It's useful for retrieving input with `$core->request->input('name')` by exemple.
 - Inject specific a CSS file for **this template only** using `$core->include_style()`
 - Inject specific a JS file for **this template only** using `$core->include_script()`
@@ -56,7 +56,7 @@ All assets are stored in the ``resources/assets`` folder. Normally as follow:
  - resources/assets/js
  - resources/assets/sass
 
-Assets are compiled using [Laravel Mix](https://laravel-mix.com/docs/4.0/basic-example).  
+Assets are compiled using [Laravel Mix](https://laravel-mix.com/docs/4.0/basic-example).
 Laravel Mix is a clean layer on top of webpack to make the 80% use case laughably simple to execute.
 
 Out-of-the box, it includes:
@@ -67,19 +67,19 @@ Out-of-the box, it includes:
 - Cache-busting (Automatic versioning)
 
 #### mix()
-We've added support for the `mix()` helper for cache-busting from within your template.  
+We've added support for the `mix()` helper for cache-busting from within your template.
 When using `$core->include_style()` or `$core->include_script()` in your controllers, your scripts ans styles will be automatically cache-busted.
 
 #### Linking to assets from templates
 Link your assets (images, icon, ...) using our custom `asset()` helper.
 
     <img src="{{ asset('/images/logo.png') }}" />`
-    
+
 ## Forms
 Custom Form can be handle this way:
 
 In your `page.php`
-    
+
     $validator = $core->validation->make(
         $core->request->input(),
         [
@@ -87,16 +87,16 @@ In your `page.php`
             // other rules
         ]
     );
-    
+
     if ($validator->fails()) {
         $errors = $validator->errors();
     }
-    
+
     $data = [
         'errors' => $errors
     ];
     $core->render('page', $data);
-    
+
 In your page.blade.php
 
         @if (isset($errors) && $errors->any())
@@ -106,22 +106,22 @@ In your page.blade.php
                 @endforeach
             </div>
         @endif
-        
+
         <form action="{{ site_url() }}/wp-admin/admin-post.php" method="post">
             <?php wp_nonce_field('contact_form') ?>
-    
+
             <input type="hidden" name="action" value="contact_form">
             <input type="text" name="name" placeholder="Your Name">
-                
+
             <input type="submit" value="Submit">
         </form>
-        
+
 In `app/ContactForm/php`
 
     <?php
-    
+
     namespace App;
-    
+
     class ContactForm
     {
         public function __construct()
@@ -129,7 +129,7 @@ In `app/ContactForm/php`
             add_action('admin_post_nopriv_contact_form', [$this, 'handle_contact_form']);
             add_action('admin_post_contact_form', [$this, 'handle_contact_form']);
         }
-    
+
         function handle_contact_form()
         {
             if (wp_verify_nonce($_POST['_wpnonce'], 'contact_form')) {
@@ -138,13 +138,13 @@ In `app/ContactForm/php`
             }
         }
     }
-    
+
 Add this in your `functions.php` under Custom Functions section.
 
     $contactForm = new \App\ContactForm();
 
 ### Validation
-Our core had support for [Laravel Validation](https://laravel.com/docs/5.7/validation). 
+Our core had support for [Laravel Validation](https://laravel.com/docs/5.7/validation).
 
 ## Helpers
 
@@ -164,9 +164,9 @@ We've also add support for the famous `dd()` ("dump and die") helper function. T
 All PHP Class files placed under the `/app` folder will be autoloaded and accessible throughout your theme files. Use them for a convienent and testable place to store your custom logic.
 
     <?php
-    
+
     namespace App;
-    
+
     class Custom
     {
         public function get_articles()
@@ -177,14 +177,14 @@ All PHP Class files placed under the `/app` folder will be autoloaded and access
             ];
         }
     }
-    
+
     ?>
-    
+
     ## Usage
     $custom = new \App\Custom();
     $articles = $custom->get_articles();
-    
-    
+
+
 ## Classic Editor. Goodbye Gutenberg.
 Using the following command, you can download and install the [Classic Editor plugin](https://wordpress.org/plugins/classic-editor/) in your Wordpress default plugins folder.
 >You still need to manually activate the plugin in the Plugins page.
@@ -193,7 +193,7 @@ Using the following command, you can download and install the [Classic Editor pl
 
 ## Cleaner Wordpress
 We've included several classes to offer a cleaner version of Wordpress by default.
- 
+
 You can enable or disable any of them by copying the `.env.example` configuration file at the root of your theme folder to `.env` and customize its content with the following options:
 
 | Option | Default | Description |
