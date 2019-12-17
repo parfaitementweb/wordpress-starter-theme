@@ -12,7 +12,14 @@ let mix = require('laravel-mix');
  */
 
 mix.js('resources/assets/js/app.js', 'dist/');
-mix.sass('resources/assets/sass/main.scss', 'dist/');
+mix.postCss('resources/assets/css/main.css', 'dist', [
+  require('tailwindcss'),
+  require('postcss-nested')
+])
+mix.postCss('resources/assets/css/editor-main.css', 'dist', [
+  require('tailwindcss'),
+  require('postcss-nested')
+])
 
 /*
  |--------------------------------------------------------------------------

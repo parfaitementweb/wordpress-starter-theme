@@ -28,6 +28,13 @@ add_action('after_setup_theme', function () {
     add_theme_support('title-tag');
 
     /**
+     * Enable gutenberg editor style
+     * @link https://developer.wordpress.org/block-editor/developers/themes/theme-support/
+     */
+    add_theme_support('editor-styles');
+    add_editor_style('/dist/editor-style.css');
+
+    /**
      * Register navigation menus
      * @link https://developer.wordpress.org/reference/functions/register_nav_menus/
      */
@@ -74,6 +81,15 @@ add_action('widgets_init', function () {
         'after_title' => '</h3>',
     ]);
 }, 10);
+
+/*
+|--------------------------------------------------------------------------
+| Registering ACF Blocks
+|--------------------------------------------------------------------------
+|
+*/
+
+require get_template_directory() . '/inc/acf-blocks.php';
 
 /*
 |--------------------------------------------------------------------------

@@ -1,0 +1,15 @@
+@tailwind base;
+
+/* Manual adjustements preventing base rules to break Gutenberg */
+button, input {
+  overflow: hidden;
+}
+
+@tailwind components;
+
+@tailwind utilities;
+
+/* Main column width */
+.wp-block {
+	max-width: 100%;
+}

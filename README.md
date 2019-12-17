@@ -4,6 +4,15 @@ This Wordpress starter theme is built with Modern PHP development practises in m
 
 This starter theme is based on the underscores.me file structure and only includes an additional and optional set of tools to ease your development.  You can and will still develop your theme as any other basic Wordpress Theme.
 
+## The theme includes out-of-the-box
+- Composer
+- Laravel Views Blade
+- Controllers
+- Laravel Mix
+- Custom Gutenberg Blocks using ACF Blocks
+- Laravel Collections
+- Srings Helpers
+- Tailwind CSS
 ---
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/parfaitementweb/wordpress-starter-theme.svg?style=flat-square)](https://packagist.org/packages/parfaitementweb/wordpress-starter-theme)
@@ -66,6 +75,8 @@ Out-of-the box, it includes:
 - Browsersync
 - Cache-busting (Automatic versioning)
 
+> CSS files are processed using *POSTCSS* by default.
+
 #### mix()
 We've added support for the `mix()` helper for cache-busting from within your template.
 When using `$core->include_style()` or `$core->include_script()` in your controllers, your scripts ans styles will be automatically cache-busted.
@@ -75,6 +86,12 @@ Link your assets (images, icon, ...) using our custom `asset()` helper.
 
     <img src="{{ asset('/images/logo.png') }}" />`
 
+
+## Tailwind CSS
+This theme comes with [Tailwind CSS](https://tailwindcss.com), an utility-CSS framework pre-installed. You can still remove it form the `package.json` dependencies and edit the CSS style as you like.  
+
+> CSS files are processed using *POSTCSS* by default.
+>
 ## Forms
 Custom Form can be handle this way:
 
@@ -147,7 +164,6 @@ Add this in your `functions.php` under Custom Functions section.
 Our core had support for [Laravel Validation](https://laravel.com/docs/5.7/validation).
 
 ## Helpers
-
 Here is below a list of additional helpers you can use anywhere in your theme.
 
 #### Collections.
@@ -185,11 +201,17 @@ All PHP Class files placed under the `/app` folder will be autoloaded and access
     $articles = $custom->get_articles();
 
 
-## Classic Editor. Goodbye Gutenberg.
-Using the following command, you can download and install the [Classic Editor plugin](https://wordpress.org/plugins/classic-editor/) in your Wordpress default plugins folder.
+## Classic Editor
+The [Classic Editor plugin](https://wordpress.org/plugins/classic-editor/) is included in the Composer dependencies. Using this command todownload and install it in your Wordpress default plugins folder.
 >You still need to manually activate the plugin in the Plugins page.
 
     composer install
+
+## Gutenberg ACF Blocks
+This starter theme supports ACF Blocks for easy Gutenberg Block creation. Please read the [ACF Blocks Documentation](https://www.advancedcustomfields.com/resources/blocks/) to learn how to proceed.
+In this theme, the blocks are registered in the `inc/acf-blocks.php` file. Views for the blocks are rendered from the `/resources/views/blocks` folder.
+
+> The Blocks views does not support Laravel Balde synthax. Regular PHP is needed.
 
 ## Cleaner Wordpress
 We've included several classes to offer a cleaner version of Wordpress by default.

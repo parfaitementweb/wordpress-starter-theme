@@ -16,7 +16,8 @@
   "license": "ISC",
   "devDependencies": {
     "cross-env": "^5.2.0",
-    "laravel-mix": "^4.0.14",
-    "normalize.css": "^8.0.1"
+    "laravel-mix": "^5.0.0",
+    "postcss-nested": "^4.2.1",
+    "tailwindcss": "^1.1.4"
   }
 }
