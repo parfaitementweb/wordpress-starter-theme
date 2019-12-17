@@ -16,7 +16,7 @@ mix.postCss('resources/assets/css/main.css', 'dist', [
   require('tailwindcss'),
   require('postcss-nested')
 ])
-mix.postCss('resources/assets/css/editor-main.css', 'dist', [
+mix.postCss('resources/assets/css/editor-style.css', 'dist', [
   require('tailwindcss'),
   require('postcss-nested')
 ])

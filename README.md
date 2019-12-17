@@ -11,7 +11,7 @@ This starter theme is based on the underscores.me file structure and only includ
 - Laravel Mix
 - Custom Gutenberg Blocks using ACF Blocks
 - Laravel Collections
-- Srings Helpers
+- Strings Helpers
 - Tailwind CSS
 ---
 
