@@ -10,13 +10,13 @@
  */
 
 // Create id attribute allowing for custom "anchor" value.
-$id = 'testimonial-' . $block['id'];
+$id = 'example-' . $block['id'];
 if( !empty($block['anchor']) ) {
     $id = $block['anchor'];
 }
 
 // Create class attribute allowing for custom "className" and "align" values.
-$className = 'testimonial';
+$className = 'example';
 if( !empty($block['className']) ) {
     $className .= ' ' . $block['className'];
 }
@@ -25,18 +25,18 @@ if( !empty($block['align']) ) {
 }
 
 // Load values and assign defaults.
-$text = get_field('text') ?: 'Your testimonial here...';
+$text = get_field('text') ?: 'Your text here...';
+$description = get_field('description') ?: 'lorem ipsum';
 $image = get_field('image') ?: 295;
 $background_color = get_field('background_color');
-$description = get_field('description') ?: 'lorem ipsum';
 
 ?>
 <div id="<?php echo esc_attr($id); ?>" class="<?php echo esc_attr($className); ?> flex justify-center items-center">
-    <blockquote class="testimonial-blockquote">
+    <blockquote class="example-blockquote">
         <div class="mr-5"><?php echo $text; ?></div>
         <div class=""><?php echo $description; ?></div>
     </blockquote>
-    <div class="testimonial-image">
+    <div class="example-image">
         <?php echo wp_get_attachment_image( $image, 'full' ); ?>
     </div>
         <style type="text/css">

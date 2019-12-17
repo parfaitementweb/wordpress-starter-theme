@@ -11,7 +11,7 @@
 
 function register_acf_block_types() {
 
-    // register a testimonial block.
+    // register an example block.
     acf_register_block_type(array(
         'name'              => 'example',
         'title'             => __('Example'),
