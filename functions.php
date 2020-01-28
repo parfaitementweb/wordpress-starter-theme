@@ -66,8 +66,6 @@ add_action( 'after_setup_theme', function () use ( $core ) {
 	 */
 	add_editor_style( get_template_directory( '/dist/main.css' ) );
 
-	$core->finish_install();
-
 }, 20 );
 
 add_action( 'widgets_init', function () {
@@ -102,4 +100,4 @@ require get_template_directory() . '/inc/acf-blocks.php';
 | Example : $contactForm = new \App\ContactForm();
 */
 
-$login_form = new \App\LoginForm($core, 'user-login-form');
+$login_form = new \App\Login\LoginForm($core, 'user-login-form');

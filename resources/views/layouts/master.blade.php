@@ -21,8 +21,8 @@
 @include('partials.footer')
 
 <noscript id="deferred-styles">
-    {{--<link rel="dns-prefetch" href="https://fonts.gstatic.com">--}}
-    {{--<link href="https://fonts.googleapis.com/css?family=Rubik:300,400,500,700" rel="stylesheet" type="text/css">--}}
+    <link rel="dns-prefetch" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css?family=Rubik:300,400,500,700" rel="stylesheet" type="text/css">
 </noscript>
 
 <script>

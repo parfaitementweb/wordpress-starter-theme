@@ -1,6 +1,6 @@
 <?php
 
-namespace App\LoginForm;
+namespace App\Login;
 
 use Parfaitement\FormBase;
 use Parfaitement\Traits\TryAuthenticateUser;
@@ -20,4 +20,5 @@ class LoginForm extends FormBase {
 	public function success() {
 		return wp_redirect( site_url() );
 	}
+
 }
