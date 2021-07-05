@@ -1,22 +1,18 @@
-<?php
+<?php get_header() ?>
 
-/**
- * The template for displaying Archive pages.
- *
- * Used to display archive-type pages if nothing more specific matches a query.
- * For example, puts together date-based pages if no date.php file exists.
- *
- * Learn more: http://codex.wordpress.org/Template_Hierarchy
- *
- * Include CSS for this query using:
- * $core->include_style('extra.css');
- *
- * Include STYLE css for this query using:
- * $core->include_script('extra.js');
- *
- * Access Request using:
- * $core->request
- **/
+<?php if (have_posts()): ?>
 
-$data = [];
-$core->render('archive', $data);
+    <?php while (have_posts()): the_post() ?>
+        {{ the_archive_title('<h1 class="page-title">', '</h1>') }}
+        <?php the_content() ?>
+        <?php echo get_the_posts_navigation()  ?>
+    <?php endwhile ?>
+
+<?php else: ?>
+<div class="alert alert-warning">
+    <?php _e('Sorry, no results were found.', 'vaux-brussels') ?>
+</div>
+<?php echo get_search_form(false) ?>
+<?php endif; ?>
+
+<?php get_footer(); ?>

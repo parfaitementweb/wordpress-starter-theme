@@ -1,21 +1,16 @@
-<?php
+<?php get_header() ?>
 
-/**
- * The main template file
- *
- * This is the most generic template file in a WordPress theme
- * and one of the two required files for a theme (the other being style.css).
- * It is used to display a page when nothing more specific matches a query.
- *
- * Include CSS for this query using:
- * $core->include_style('extra.css');
- *
- * Include STYLE css for this query using:
- * $core->include_script('extra.js');
- *
- * Access Request using:
- * $core->request
- **/
+<?php if (have_posts()): ?>
 
-$data = [];
-$core->render('index', $data);
+    <?php while (have_posts()): the_post() ?>
+        <?php the_content() ?>
+    <?php endwhile ?>
+
+<?php else: ?>
+    <div class="alert alert-warning">
+        <?php _e('Sorry, no results were found.', 'vaux-brussels') ?>
+    </div>
+    <?php echo get_search_form(false) ?>
+<?php endif; ?>
+
+<?php get_footer(); ?>

@@ -1,0 +1,15 @@
+/* Manual adjustements preventing base rules to break Gutenberg */
+button, input {
+    overflow: hidden;
+}
+
+/* Main column width */
+.wp-block {
+    max-width: 100%;
+}
+
+/* This removes the default margins between blocks in the editor. */
+.block-editor-block-list__block {
+    margin-top: 0;
+    margin-bottom: 0;
+}

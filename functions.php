@@ -8,8 +8,23 @@
 | Load the Magic. Do not edit. Leave on top
 |
 */
-require get_template_directory() . '/vendor/autoload.php';
-$core = new Parfaitement\Core();
+
+require get_template_directory() . '/starter/loader.php';
+
+/*
+|--------------------------------------------------------------------------
+| Auto register Inc files
+|--------------------------------------------------------------------------
+|
+*/
+
+foreach (new DirectoryIterator(__DIR__ . '/inc') as $fileinfo) {
+    if (! $fileinfo->isDot()) {
+        if ($fileinfo->getExtension() == 'php') {
+            require $fileinfo->getPathname();
+        }
+    }
+}
 
 /*
 |--------------------------------------------------------------------------
@@ -20,12 +35,22 @@ $core = new Parfaitement\Core();
 |
 */
 
-add_action( 'after_setup_theme', function () use ( $core ) {
+add_action( 'after_setup_theme', function () {
 	/**
 	 * Enable plugins to manage the document title
 	 * @link https://developer.wordpress.org/reference/functions/add_theme_support/#title-tag
 	 */
 	add_theme_support( 'title-tag' );
+
+    /**
+     * Enable custom logo
+     * @link https://developer.wordpress.org/themes/functionality/custom-logo/
+     */
+    $defaults = [
+        'flex-height'          => true,
+        'flex-width'           => true,
+    ];
+    add_theme_support( 'custom-logo', $defaults );
 
 	/**
 	 * Enable gutenberg editor style
@@ -48,6 +73,16 @@ add_action( 'after_setup_theme', function () use ( $core ) {
 	 */
 	add_theme_support( 'post-thumbnails' );
 
+    /**
+     * Adding post thumbnails
+     * Those mirrors the TailwindCSS default breakpoints
+     */
+    add_image_size('sm', 640);
+    add_image_size('md', 768);
+    add_image_size('lg', 1024);
+    add_image_size('xl', 1280);
+    add_image_size('xl', 1536);
+
 	/**
 	 * Enable HTML5 markup support
 	 * @link https://developer.wordpress.org/reference/functions/add_theme_support/#html5
@@ -64,7 +99,7 @@ add_action( 'after_setup_theme', function () use ( $core ) {
 	 * Use main stylesheet for visual editor
 	 * @see resources/assets/styles/layouts/_tinymce.scss
 	 */
-	add_editor_style( get_template_directory( '/dist/main.css' ) );
+    add_editor_style( '/dist/main.css' );
 
 }, 20 );
 
@@ -85,19 +120,33 @@ add_action( 'widgets_init', function () {
 
 /*
 |--------------------------------------------------------------------------
-| Registering ACF Blocks
+| SCRIPTS
 |--------------------------------------------------------------------------
 |
 */
 
-require get_template_directory() . '/inc/acf-blocks.php';
+add_action('wp_enqueue_scripts', function () {
+    wp_enqueue_style('theme-style', get_stylesheet_directory_uri() . '/dist/main.css', [], filemtime(get_stylesheet_directory() . '/dist/main.css'), 'all');
+    wp_enqueue_script('theme-script', get_stylesheet_directory_uri() . '/dist/app.js', [], filemtime(get_stylesheet_directory() . '/dist/app.js'), true);
+    wp_enqueue_script('alpinejs', 'https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.8.2/dist/alpine.min.js', [], '2.8.2');
+});
 
 /*
 |--------------------------------------------------------------------------
-| CUSTOM Functions
+| Forms
 |--------------------------------------------------------------------------
 |
-| Example : $contactForm = new \App\ContactForm();
 */
+//$loginform = App\Forms\LoginForm::make('user-login-form');
 
-$login_form = new \App\Login\LoginForm($core, 'user-login-form');
+/*
+|--------------------------------------------------------------------------
+| Passing variables to views
+|--------------------------------------------------------------------------
+|
+| add_filter('theme/template/front-page/data', function (array $data) {
+|     $data['foo'] = 'bar';
+|
+|     return $data;
+| });
+*/

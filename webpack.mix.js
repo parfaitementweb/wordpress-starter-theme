@@ -11,23 +11,26 @@ let mix = require('laravel-mix');
  |
  */
 
-mix.js('resources/assets/js/app.js', 'dist/');
-mix.postCss('resources/assets/css/main.css', 'dist', [
-  require('tailwindcss'),
-  require('postcss-nested')
-])
-mix.postCss('resources/assets/css/editor-style.css', 'dist', [
-  require('tailwindcss'),
-  require('postcss-nested')
-])
+mix.js('assets/js/app.js', 'app.js').react();
+
+mix.postCss('assets/css/main.css', 'main.css');
+mix.postCss('assets/css/editor-style.css', 'editor-style.css');
+
+mix.options({
+    postCss: [
+        require("postcss-import"),
+        require('postcss-nested'),
+        require('tailwindcss'),
+        require('autoprefixer')
+    ]
+});
 
 /*
  |--------------------------------------------------------------------------
  | DO NOT EDIT BELOW
  |--------------------------------------------------------------------------
  */
-mix.setPublicPath('dist/');
-mix.setResourceRoot('./');
+mix.setPublicPath('dist');
 mix.version();
 /*
  |--------------------------------------------------------------------------

@@ -1,21 +1,19 @@
-<?php
+<?php get_header() ?>
 
-/**
- * Search results page
- *
- * Learn more: http://codex.wordpress.org/Template_Hierarchy
- *
- * Include CSS for this query using:
- * $core->include_style('extra.css');
- *
- * Include STYLE css for this query using:
- * $core->include_script('extra.js');
- *
- * Access Request using:
- * $core->request
- **/
+<?php get_search_form(); ?>
 
-$data = [
-    'query' => get_search_query(),
-];
-$core->render('search', $data);
+
+    <h1><?php _e('Search Results for: <span>' . get_search_query() . '</span>', 'vaux-brussels') ?></h1>
+
+<?php if (have_posts()): ?>
+    <?php while (have_posts()): the_post() ?>
+        <?php the_title() ?>
+    <?php endwhile ?>
+<?php else: ?>
+    <div class="alert alert-warning">
+        <?php _e('Sorry, no results were found.', 'vaux-brussels') ?>
+    </div>
+<?php endif ?>
+<?php wp_reset_query() ?>
+
+<?php get_footer() ?>
