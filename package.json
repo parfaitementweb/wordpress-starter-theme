@@ -10,7 +10,8 @@
     "watch-poll": "mix watch -- --watch-options-poll=1000",
     "hot": "NODE_ENV=development mix watch --hot",
     "prod": "npm run production",
-    "production": "mix --production"
+    "production": "mix --production",
+    "builder": "node builder.mjs"
   },
   "keywords": [],
   "author": "",

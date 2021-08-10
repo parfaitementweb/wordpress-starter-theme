@@ -1,0 +1,9 @@
+.primary-navigation {
+    .menu-item {
+        @apply text-gray-900 hover:bg-gray-50 hover:text-gray-900 rounded-md py-2 px-3;
+    }
+
+    .current-menu-item {
+        @apply bg-gray-100 text-gray-900;
+    }
+}

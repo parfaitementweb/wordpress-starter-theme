@@ -48,3 +48,15 @@ function custom_acf_json_load_path($paths)
 
     return $paths;
 }
+
+/*
+|--------------------------------------------------------------------------
+| Load Carbon Fields
+|--------------------------------------------------------------------------
+|
+*/
+add_action( 'after_setup_theme', 'crb_load' );
+function crb_load() {
+    define( 'Carbon_Fields\URL', get_template_directory_uri(). '/vendor/htmlburger/carbon-fields/' );
+//    \Carbon_Fields\Carbon_Fields::boot();
+}

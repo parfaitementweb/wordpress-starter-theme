@@ -4,22 +4,10 @@ namespace Starter;
 
 use DirectoryIterator;
 use Dotenv\Dotenv;
-use Illuminate\Container\Container;
-use Illuminate\Filesystem\Filesystem;
-use Illuminate\Http\Request;
-use Illuminate\Translation\FileLoader;
-use Illuminate\Translation\Translator;
-use Illuminate\Validation\Factory as ValidationFactory;
 
 class Choke
 {
     private static $instance = null;
-
-    public $container = null;
-
-    public $request = null;
-
-    public $validation = null;
 
     private function __construct()
     {
@@ -37,17 +25,9 @@ class Choke
 
     protected function init()
     {
-        $this->container = new Container();
-
         $this->load_environment();
-        $this->load_validation();
         $this->clean_wordpress();
-
-//        $this->login_and_register();
-
         $this->loadAcfBlocks();
-
-        $this->request = Request::capture();
     }
 
     protected function load_environment()
@@ -72,43 +52,21 @@ class Choke
         });
     }
 
-    public function load_validation()
-    {
-        $wp_locale = substr(get_locale(), 0, 2);
-        $locale = in_array($wp_locale, ['fr', 'nl', 'en']) ? $wp_locale : 'en';
-
-        $loader = new FileLoader(new Filesystem, __DIR__ . '/lang');
-        $translator = new Translator($loader, $locale);
-        $this->validation = new ValidationFactory($translator, $this->container);
-    }
-
-    private function login_and_register()
-    {
-        add_action('after_setup_theme', function () {
-            foreach ([['title' => 'Login Page', 'name' => 'login', 'env' => 'LOGIN_PAGE'], ['title' => 'Registration Page', 'name' => 'register', 'env' => 'REGISTER_PAGE']] as $page) {
-                if ((new \WP_Query(['post_type' => 'page', 'pagename' => $page['name'],]))->post_count == 0) {
-                    $data = array(
-                        'post_title' => $page['title'],
-                        'post_content' => '',
-                        'post_status' => 'publish',
-                        'post_author' => 1,
-                        'post_type' => 'page',
-                        'post_name' => $page['name']
-                    );
-
-                    if (env($page['env'], false)) {
-                        wp_insert_post($data);
-                    }
-                }
-            }
-        });
-    }
-
     private function loadAcfBlocks()
     {
         if (function_exists('acf_register_block_type')) {
             add_action('acf/init', [$this, 'register_acf_block_types']);
         }
+
+        // Fix an issue with wpauto ands ACF Blocks
+        add_filter('render_block', function ($block_content, $block) {
+            if (strpos($block['blockName'], 'acf') !== false) {
+                remove_filter('the_content', 'wpautop');
+                remove_filter('the_excerpt', 'wpautop');
+            }
+
+            return $block_content;
+        }, 10, 2);
     }
 
     function register_acf_block_types()

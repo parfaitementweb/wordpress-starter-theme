@@ -7,6 +7,6 @@
 <?php wp_body_open(); ?>
 <?php get_template_part('template-parts/header') ?>
 
-<div class="wrap">
-    <div id="primary" class="content-area">
-        <main id="main" class="site-main" role="main">
+<div class="wrap with-padding">
+    <a class="screen-reader-text" href="#primary"><?php esc_html_e( 'Skip to content', 'starter_theme' ); ?></a>
+        <main id="primary" role="main">

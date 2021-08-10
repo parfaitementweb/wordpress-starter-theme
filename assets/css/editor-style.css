@@ -13,3 +13,8 @@ button, input {
     margin-top: 0;
     margin-bottom: 0;
 }
+
+/* Disable clicking on links */
+.acf-block-preview a {
+    pointer-events: none !important;
+}

@@ -1,0 +1,29 @@
+.wrap, .navigation {
+    @apply container mx-auto;
+
+    &.with-padding {
+        @apply px-6 lg:px-0
+    }
+}
+
+.prose .entry-title {
+    @apply mb-1
+}
+
+.blog {
+    article:last-child {
+        @apply mb-0;
+    }
+
+    article {
+        @apply mb-6;
+    }
+
+    .prose .entry-title {
+        @apply mb-3
+    }
+
+    .excerpt p {
+        @apply mt-0 mb-0;
+    }
+}

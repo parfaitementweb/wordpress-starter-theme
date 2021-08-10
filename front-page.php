@@ -1,13 +1,11 @@
 <?php
 /**
- * The template for displaying all pages
+ * The template for displaying the front page.
  */
 
 get_header() ?>
 
 <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
-
-<?php the_title( '<h1 class="page-title">', '</h1>' ); ?>
 
 <?php while (have_posts()): the_post() ?>
     <?php the_content() ?>
