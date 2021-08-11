@@ -2,17 +2,12 @@
 
 /*
 Title: Footer
-Description: Footer Block.
-Category: common
-Icon: admin-comments
-Keywords:
+Description: Footer with logo, Primary Navigation and InnerBlocks
 Jsx: true
 */
 
 $className = 'footer-block';
 
-// Create id attribute allowing for custom "anchor" value.
-// Create class attribute allowing for custom "className" and "align" values.
 $id = $className . '-' . $block['id'];
 if (! empty($block['anchor'])) {
     $id = $block['anchor'];

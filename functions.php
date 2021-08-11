@@ -40,7 +40,7 @@ add_action('after_setup_theme', function () {
      * Enable plugins to manage the document title
      * @link https://developer.wordpress.org/reference/functions/add_theme_support/#title-tag
      */
-    add_theme_support( 'title-tag' );
+    add_theme_support('title-tag');
 
     /**
      * Enable custom logo
@@ -69,7 +69,7 @@ add_action('after_setup_theme', function () {
      * @see resources/assets/styles/layouts/_tinymce.scss
      */
     add_editor_style('/dist/editor-style.css');
-    add_editor_style( '/dist/main.css' );
+    add_editor_style('/dist/main.css');
 
     /**
      * Register navigation menus
@@ -149,12 +149,14 @@ add_action('after_setup_theme', 'custom_content_width', 0);
  * Allow adminstrators to upload SVG.
  *
  */
-add_filter( 'upload_mimes', 'parf_add_svg_mime' );
-function parf_add_svg_mime( $mimes ) {
-    if ( !current_user_can( 'edit_theme_options' ) ) {
+add_filter('upload_mimes', 'parf_add_svg_mime');
+function parf_add_svg_mime($mimes)
+{
+    if (! current_user_can('edit_theme_options')) {
         return $mimes;
     }
     $mimes['svg'] = 'image/svg+xml';
+
     return $mimes;
 }
 
@@ -182,3 +184,35 @@ add_action('wp_enqueue_scripts', function () {
 |     return $data;
 | });
 */
+
+add_filter('acf/load_value/key=field_61139dab27ca6', 'default_value_field_61139dab27ca6', 10, 3);
+
+function default_value_field_61139dab27ca6($value, $post_id, $field)
+{
+    if ($value === false) {
+        $value = array(
+            array(
+                'field_61139db927ca7' => array(
+                    'field_61139dc627ca8' => array(
+                        'title' => 'See our products',
+                        'url' => '#',
+                        'target' => '',
+                    ),
+                    'field_61139de827ca9' => 'normal',
+                )
+            ),
+            array(
+                'field_61139db927ca7' => array(
+                    'field_61139dc627ca8' => array(
+                        'title' => 'Discover more',
+                        'url' => '#',
+                        'target' => '',
+                    ),
+                    'field_61139de827ca9' => 'outline',
+                )
+            ),
+        );
+    }
+
+    return $value;
+}
