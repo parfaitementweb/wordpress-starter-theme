@@ -1,9 +1,9 @@
 .wrap, .navigation {
     @apply container mx-auto;
+}
 
-    &.with-padding {
-        @apply px-6 lg:px-0
-    }
+.navigation.wrap, .navigation.with-padding {
+    @apply px-6 lg:px-0
 }
 
 .prose .entry-title {
@@ -25,17 +25,5 @@
 
     .excerpt p {
         @apply mt-0 mb-0;
-    }
-}
-
-.btn {
-    @apply inline-flex items-center px-4 py-2 shadow-sm text-base font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500;
-
-    &-lg {
-        @apply px-6 py-3;
-    }
-
-    &-outline {
-        @apply border border-gray-300 bg-transparent text-white hover:text-gray-700;
     }
 }

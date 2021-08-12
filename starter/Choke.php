@@ -4,6 +4,9 @@ namespace Starter;
 
 use DirectoryIterator;
 use Dotenv\Dotenv;
+use RecursiveDirectoryIterator;
+use RecursiveIteratorIterator;
+use RegexIterator;
 
 class Choke
 {
@@ -67,79 +70,56 @@ class Choke
 
             return $block_content;
         }, 10, 2);
-
-        // Register custom Editor Block Category
-        add_action('block_categories', [$this, 'register_parfaitement_web_block_category'], 10, 2);
-
-        // Auto Register all ACF JSON Blocks
-        $dir = new DirectoryIterator(get_stylesheet_directory() . '/acf-json');
-        foreach ($dir as $file) {
-            if (! $file->isDot() && 'json' == $file->getExtension() && strpos($file->getFileName(), 'block_') !== false) {
-                $array = json_decode(file_get_contents($file->getPathname()), true);
-//                acf_add_local_field_group($array);
-            }
-        }
     }
 
     function register_acf_block_types()
     {
-        foreach (new DirectoryIterator(__DIR__ . '/../template-parts/blocks') as $fileinfo) {
-            if (! $fileinfo->isDot()) {
-                $slug = str_replace('.php', '', $fileinfo->getFilename());
+        $directory_iterator = new RecursiveDirectoryIterator(__DIR__ . '/../template-parts/blocks');
+        $iterator = new RecursiveIteratorIterator($directory_iterator);
+        $regex_iterator = new RegexIterator($iterator, '/\.php$/');
+        $regex_iterator->setFlags(RegexIterator::USE_KEY);
+        foreach ($regex_iterator as $fileinfo) {
+            $slug = str_replace('.php', '', $fileinfo->getFilename());
 
-                $path = $fileinfo->getPath() . '/' . $fileinfo->getFilename();
+            $path = $fileinfo->getPath() . '/' . $fileinfo->getFilename();
 
-                $file_headers = get_file_data($path, [
-                    'title' => 'Title',
-                    'description' => 'Description',
-                    'category' => 'Category',
-                    'icon' => 'Icon',
-                    'keywords' => 'Keywords',
-                    'mode' => 'Mode',
-                    'jsx' => 'JSX',
-                ]);
+            $file_headers = get_file_data($path, [
+                'title' => 'Title',
+                'description' => 'Description',
+                'category' => 'Category',
+                'icon' => 'Icon',
+                'keywords' => 'Keywords',
+                'mode' => 'Mode',
+                'jsx' => 'JSX',
+            ]);
 
-                if (empty($file_headers['title'])) {
-                    die(_e('This block needs a title: ' . $path));
-                }
-
-                $data = [
-                    'name' => $slug,
-                    'title' => $file_headers['title'],
-                    'description' => $file_headers['description'],
-                    'category' => $file_headers['category'] ?: 'parfaitement-web',
-                    'icon' => $file_headers['icon'] ?: 'schedule',
-                    'mode' => $file_headers['mode'] ?: 'preview',
-                    'keywords' => explode(' ', $file_headers['keywords']),
-                    'render_template' => 'template-parts/blocks/' . $slug . '.php',
-                    'supports' => [
-                        'align' => false,
-                        'align_text' => false,
-                        'align_content' => false,
-                        'jsx' => $file_headers['jsx'] ?: false,
-                    ],
-                    'example' => array(
-                        'attributes' => array(
-                            'mode' => 'preview',
-                            'data' => array()
-                        )
-                    )
-                ];
-                acf_register_block($data);
+            if (empty($file_headers['title'])) {
+                die(_e('This block needs a title: ' . $path));
             }
-        }
-    }
 
-    function register_parfaitement_web_block_category($categories)
-    {
-        return array_merge(
-            $categories,
-            [
-                [
-                    'slug' => 'parfaitement-web',
-                    'title' => __('Parfaitement Web', 'starter_theme'),
+            $data = [
+                'name' => $slug,
+                'title' => $file_headers['title'],
+                'description' => $file_headers['description'],
+                'category' => $file_headers['category'] ?: 'parfaitement-web',
+                'icon' => $file_headers['icon'] ?: 'schedule',
+                'mode' => $file_headers['mode'] ?: 'preview',
+                'keywords' => explode(' ', $file_headers['keywords']),
+                'render_template' => 'template-parts/blocks/' . $slug . '.php',
+                'supports' => [
+                    'align' => false,
+                    'align_text' => false,
+                    'align_content' => false,
+                    'jsx' => $file_headers['jsx'] ?: false,
                 ],
-            ]
-        );
+                'example' => array(
+                    'attributes' => array(
+                        'mode' => 'preview',
+                        'data' => array()
+                    )
+                )
+            ];
+            acf_register_block($data);
+        }
     }
 }

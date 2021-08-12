@@ -53,23 +53,18 @@ add_action('after_setup_theme', function () {
     add_theme_support('custom-logo', $defaults);
 
     /**
-     * Enable gutenberg editor style
-     * @link https://developer.wordpress.org/block-editor/developers/themes/theme-support/
-     */
-    add_theme_support('editor-styles');
-
-    /**
      * Enable padding control
      * @link https://developer.wordpress.org/block-editor/developers/themes/theme-support/
      */
     add_theme_support('custom-spacing');
 
     /**
+     * Enable gutenberg editor style
      * Use main stylesheet for visual editor
      * @see resources/assets/styles/layouts/_tinymce.scss
      */
+    add_theme_support('editor-styles');
     add_editor_style('/dist/editor-style.css');
-    add_editor_style('/dist/main.css');
 
     /**
      * Register navigation menus
@@ -89,11 +84,11 @@ add_action('after_setup_theme', function () {
      * Adding post thumbnails
      * Those mirrors the TailwindCSS default breakpoints
      */
-    add_image_size('sm', 640);
-    add_image_size('md', 768);
-    add_image_size('lg', 1024);
-    add_image_size('xl', 1280);
-    add_image_size('xl', 1536);
+//    add_image_size('sm', 640);
+//    add_image_size('md', 768);
+//    add_image_size('lg', 1024);
+//    add_image_size('xl', 1280);
+//    add_image_size('xl', 1536);
 
     /**
      * Enable HTML5 markup support
