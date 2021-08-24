@@ -15,6 +15,7 @@ mix.js('assets/js/app.js', 'app.js');
 
 mix.postCss('assets/css/main.css', 'main.css');
 mix.postCss('assets/css/editor-style.css', 'editor-style.css');
+mix.postCss('assets/css/custom_blocks.css', 'custom_blocks.css');
 
 mix.options({
     postCss: [

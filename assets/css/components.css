@@ -1,9 +1,5 @@
 .wrap, .navigation {
-    @apply container mx-auto;
-}
-
-.navigation.wrap, .navigation.with-padding {
-    @apply px-6 lg:px-0
+    @apply container;
 }
 
 .prose .entry-title {

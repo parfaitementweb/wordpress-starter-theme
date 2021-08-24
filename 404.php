@@ -1,7 +1,7 @@
 <?php get_header() ?>
 
     <div class="flex items-center">
-        <div class="container mx-auto py-12 flex flex-col md:flex-row items-center justify-center px-5 text-gray-700">
+        <div class="container py-12 flex flex-col md:flex-row items-center justify-center px-5 text-gray-700">
             <div class="max-w-lg">
                 <svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2395 1800" width="400">
                     <defs>
