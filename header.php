@@ -7,6 +7,5 @@
 <?php wp_body_open(); ?>
 <?php get_template_part('template-parts/header') ?>
 
-<div class="wrap">
-    <a class="screen-reader-text" href="#primary"><?php esc_html_e( 'Skip to content', 'starter_theme' ); ?></a>
-        <main id="primary" role="main">
+<a class="screen-reader-text" href="#primary"><?php esc_html_e('Skip to content', 'starter_theme'); ?></a>
+<main id="primary" role="main">

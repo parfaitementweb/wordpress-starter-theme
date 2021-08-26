@@ -1,7 +1,3 @@
-.wrap, .navigation {
-    @apply container;
-}
-
 .prose .entry-title {
     @apply mb-1
 }

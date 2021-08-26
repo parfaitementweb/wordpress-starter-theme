@@ -1,5 +1,5 @@
-<nav x-data="{ open: false }">
-    <div class="navigation with-padding ">
+<nav x-data="{ open: false }" class="navigation">
+    <div class="navigation">
         <div class="flex justify-between h-16">
             <div class="relative flex w-full">
                 <div class="absolute inset-y-0 left-0 flex items-center sm:hidden">
